@@ -11,5 +11,46 @@
     </a-marker>
     <a-entity camera></a-entity>
   </a-scene>
+
+
+  <script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/11.7.3/firebase-app.js";
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.7.3/firebase-analytics.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
+
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  const firebaseConfig = {
+    apiKey: "AIzaSyDDOHUnbja3li-KvU0hVRoIRAcScHadUyw",
+    authDomain: "webar-visitapp.firebaseapp.com",
+    projectId: "webar-visitapp",
+    storageBucket: "webar-visitapp.firebasestorage.app",
+    messagingSenderId: "991762844576",
+    appId: "1:991762844576:web:c5eb7311cb0e069e5df2c5",
+    measurementId: "G-QR1REFDLNT"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+  const auth = getAuth(app);
+  const db = getFirestore(app);
+
+  signInAnonymously(auth)
+    .then((UserCredential) => {
+      const uid = UserCredential.user.uid;
+      console.log("ログイン成功:UID = ",uid);
+      const now = new Data();
+      await setDoc(doc(db,"visit",uid),{
+        visitedAt: now.toISOString(),
+        marker:"hiro" 
+      });
+    })
+    .catch((error) => {
+      console.error("ログイン失敗:",error);
+    });
+</script>
 </body>
 </html>
