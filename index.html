@@ -43,21 +43,23 @@
   const auth = getAuth(app);
   const db = getFirestore(app);
 
-  signInAnonymously(auth)
-    .then((UserCredential) => {
+  async function loginAndSave() {
+    try{
+      const UserCredential = await signInAnonymously(auth);
       const uid = UserCredential.user.uid;
+
       console.log("ログイン成功:UID = ",uid);
       const now = new Data();
-      async function recordLog() {
-      const log = await setDoc(doc(db,"visit",uid),{
+      await setDoc(doc(db,"visit",uid),{
         visitedAt: now.toISOString(),
         marker:"hiro" 
       });
-      }
-    })
-    .catch((error) => {
-      console.error("ログイン失敗:",error);
-    });
+      console.log("Firestoreに保存成功")
+    } catch (error)  {
+      console.error("ログイン失敗:",error); 
+    }
+  }
+
 </script>
 </body>
 </html>
