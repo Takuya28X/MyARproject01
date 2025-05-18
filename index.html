@@ -51,7 +51,7 @@
 
       console.log("ログイン成功:UID = ",uid);
       const now = new Data();
-      await setDoc(doc(db,"visit",uid),{
+      await setDoc(doc(db,"visits",uid),{
         visitedAt: now.toISOString(),
         marker:"hiro" 
       });
@@ -61,6 +61,8 @@
     }
   }
 
+loginAndSave();
+    
 </script>
 </body>
 </html>
