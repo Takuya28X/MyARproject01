@@ -46,7 +46,8 @@
       const uid = UserCredential.user.uid;
 
       console.log("ログイン成功:UID = ",uid);
-      const now = new Data();
+      
+      const now = new Date();
       await setDoc(doc(db,"visits",uid),{
         visitedAt: now.toISOString(),
         marker:"hiro" 
