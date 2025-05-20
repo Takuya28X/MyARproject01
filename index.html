@@ -55,8 +55,6 @@ onAuthStateChanged(auth , async(user) => {
     }else{
       console.log("ログインしたことがありません");
       document.getElementById("username-form").style.display = "block";
-      //document.getElementById("namesetting-overlay").style.display = "none";
-      document.getElementById("top").style.display = "none";
     }
   } catch(e){
     console.error("データ取得エラー：",e);
