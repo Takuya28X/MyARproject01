@@ -41,6 +41,7 @@ onAuthStateChanged(auth , async(user) => {
       const username = userSnap.data().username;
       document.getElementById("username-form").style.display = "none";
       document.getElementById("greeting").innerText = `こんにちは、${username}さん`;
+      console.log("こんにちは、${username}さん");
       document.getElementById("greeting").style.display = "block";
     }else{
       console.log("ログインしたことがありません");
@@ -74,11 +75,48 @@ window.submitUsername = submitUsername;
   <script src="https://cdn.rawgit.com/jeromeetienne/ar.js/2.1.8/aframe/build/aframe-ar.min.js"></script>
 </head>
 <body style="margin: 0; overflow: hidden;">
+  <style>
+  #username-form {
+    position: absolute;
+    top: 20px;
+    left: 30px;
+    z-index: 1000;
+    background-color: rgba(255, 255, 255, 0.8); /* 半透明の白背景 */
+    padding: 15px;
+    border-radius: 10px;
+  }
+
+  #username-input {
+    font-size: 16px;
+    padding: 8px;
+    width: 180px;
+  }
+
+  #submit-button {
+    font-size: 14px;
+    padding: 8px;
+    margin-top: 8px;
+  }
+
+  #greeting {
+    position: absolute;
+    top: 20px;
+    left: 30px;
+    font-size: 20px;
+    background-color: rgba(0, 128, 255, 0.8);
+    color: white;
+    padding: 10px;
+    border-radius: 10px;
+    z-index: 1000;
+  }
+</style>
+
   <div id = "username-form">
-  <input type="text" id = "username-input" placeholder="ユーザー名を入力" style="position: absolute; top:20px; left:30px; z-index: 1000;"/>
-  <button onclick="submitUsername()" style="position:absolute; top:38px; left:160px; z-index:10000;">送信</button>
+  <input type="text" id = "username-input" placeholder="ユーザー名を入力" />
+  <button onclick="submitUsername()" >送信</button>
   </div>
-  <div id = "greeting" style = "position:absolute; top: 40px; left: 200px;" ></div>
+  <div id = "greeting" ></div>
+  
   <a-scene embedded arjs="debugUIEnabled: false;"> 
     <a-marker preset="hiro">
        <!-- <a-box position="0 0.5 0" color="red"></a-box> -->
