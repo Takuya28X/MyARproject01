@@ -72,6 +72,7 @@ async function submitUsername() {
   document.getElementById("username-form").style.display = "none";
   document.getElementById("greeting").innerText = `こんにちは、${username}さん`;
   document.getElementById("greeting").style.display = "block";
+  document.getElementById("ar-scene").style.diplay = "block";
 }
 
 window.submitUsername = submitUsername;
@@ -126,7 +127,7 @@ window.submitUsername = submitUsername;
 </div>
 <div id = "greeting" ></div>
   
-  <a-scene embedded arjs="debugUIEnabled: false;"> 
+  <a-scene id = "ar-scene" embedded arjs="debugUIEnabled: false; style="display: none;""> 
     <a-marker preset="hiro">
        <!-- <a-box position="0 0.5 0" color="red"></a-box> -->
     </a-marker>
